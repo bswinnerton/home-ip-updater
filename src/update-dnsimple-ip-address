@@ -1,0 +1,12 @@
+#!/bin/bash
+
+IP=`curl -s http://icanhazip.com/`
+
+curl \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -X "PATCH" \
+  -s "https://api.dnsimple.com/v2/$ACCOUNT_ID/zones/$ZONE_ID/records/$RECORD_ID" \
+  -d "{\"content\":\"$IP\"}" \
+  | jq .
